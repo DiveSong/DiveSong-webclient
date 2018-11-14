@@ -57,7 +57,7 @@ class Track extends Component {
                     </li>
                     <li className="list-group-item bg-dark border-0">
                       <div className="col btn btn-sm btn-outline-success">
-                        Request Song
+                        Request
                       </div>
                     </li>
                   </ul>

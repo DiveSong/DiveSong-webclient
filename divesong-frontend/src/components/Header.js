@@ -4,11 +4,17 @@ class Header extends Component {
   render() {
     const { branding } = this.props;
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-3 py-0 sticky-top">
+      <nav className="navbar navbar-expand-sm navbar-dark veryblack mb-3 py-0 sticky-top">
         <div className="container">
           <a href="/" className="navbar-brand">
             {branding}
           </a>
+          <input
+            className="form-control bg-dark w-100 border-0"
+            type="text"
+            placeholder="Search"
+            aria-label="Search"
+          />
           <div>
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
