@@ -8,3 +8,8 @@
   color: white;
   text-align: center;
 }
+
+.background {
+  background-image: url('./assets/background.jpg');
+  background-color: #cccccc;
+}
