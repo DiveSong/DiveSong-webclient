@@ -26,7 +26,7 @@ class Track extends Component {
                 // }
               >
                 <img
-                  className="card img-top"
+                  className="card img-top border-0"
                   src={img}
                   alt={name}
                   height="225px"
@@ -38,8 +38,8 @@ class Track extends Component {
                   </h6>
 
                   {/* {showTrackInfo ? ( */}
-                  <ul className="list-group">
-                    <li className="list-group-item bg-dark">
+                  <ul className="list-group border-0">
+                    <li className="list-group-item bg-dark border-0">
                       <div className="row bg-dark">
                         <div className="col btn btn-sm btn-outline-success">
                           <i
@@ -55,7 +55,7 @@ class Track extends Component {
                         </div>
                       </div>
                     </li>
-                    <li className="list-group-item bg-dark">
+                    <li className="list-group-item bg-dark border-0">
                       <div className="col btn btn-sm btn-outline-success">
                         Request Song
                       </div>

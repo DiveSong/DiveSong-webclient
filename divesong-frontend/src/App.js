@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <Provider>
-        <div className="App bg-dark background">
+        <div className="App background">
           <Header branding="DiveSong" />
 
           <Tracks />
