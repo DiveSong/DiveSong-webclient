@@ -33,7 +33,7 @@ class Track extends Component {
                   width="100%"
                 />
                 <div className="card-body">
-                  <h6 className="text-white-50 bg-dark">
+                  <h6 className="text-white-50 bg-dark text-truncate">
                     {name} - {artist}{' '}
                   </h6>
 
