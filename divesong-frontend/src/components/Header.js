@@ -10,7 +10,7 @@ class Header extends Component {
             {branding}
           </a>
           <input
-            className="form-control bg-dark w-100 border-0 text-light"
+            className="form-control bg-dark w-100 border-0 text-white-50"
             type="text"
             placeholder="Search"
             aria-label="Search"
