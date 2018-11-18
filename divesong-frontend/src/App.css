@@ -1,40 +1,20 @@
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
-  background-color: red;
-  color: white;
-  text-align: center;
-}
-
-.background {
-  background-image: url('./assets/background.jpg');
-  background-color: #212529;
-}
-
-.veryblack {
-  background-color: #212529;
-}
-/*
-.App {
+/* .App {
   height: 100vh;
   display: flex;
-  color: white;
+  color: rgb(110, 104, 104);
 }
 
 .App__Aside {
   width: 50%;
-  background-color: #66dac7;
+  background-color: #66DAC7;
 }
 
 .App__Form {
   width: 50%;
-  background-color: #2e4158;
+  background-color: #2E4158;
   padding: 25px 40px;
   overflow: auto;
-}
+} */
 
 .PageSwitcher {
   display: flex;
@@ -92,7 +72,7 @@
 }
 
 .FormTitle__Link--Active {
-  color: white;
+  color: grey;
   border-bottom: 1px solid #199087;
 }
 
@@ -104,7 +84,7 @@
   display: block;
   text-transform: uppercase;
   font-size: 0.9em;
-  color: white;
+  color: Grey;
 }
 .FormField__Input {
   width: 85%;
@@ -120,7 +100,7 @@
 }
 
 .FormField__Input::placeholder {
-  color: #616e7f;
+  color: rgb(210, 217, 228);
 }
 
 .FormField__Button {
@@ -159,4 +139,24 @@
   display: inline-block;
   padding-bottom: 2px;
   margin-left: 5px;
-} */
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+
+.background {
+  background-image: url('./assets/background.jpg');
+  background-color: #212529;
+}
+
+.veryblack {
+  background-color: #212529;
+}

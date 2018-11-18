@@ -33,7 +33,9 @@ export class Provider extends Component {
         img:
           'https://upload.wikimedia.org/wikipedia/en/8/8f/Zara_Larsson_-_Lush_Life.png'
       }
-    ]
+    ],
+
+    users: []
   };
 
   render() {
