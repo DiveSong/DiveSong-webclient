@@ -7,7 +7,8 @@ class Tracks extends Component {
     return (
       <Consumer>
         {value => {
-          const { tracks } = value;
+          const { tracks, users, user } = value;
+
           return (
             <div className="album py-5">
               <div className="container">

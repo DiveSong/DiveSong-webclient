@@ -9,6 +9,12 @@ const reducer = (state, action) => {
         ...state,
         users: [action.payload, ...state.users]
       };
+
+    case 'TEMP_USER':
+      return {
+        ...state,
+        user: action.payload
+      };
     default:
       return state;
   }
@@ -67,6 +73,8 @@ export class Provider extends Component {
         password: '1234'
       }
     ],
+    user: {},
+
     dispatch: action => this.setState(state => reducer(state, action))
   };
 
