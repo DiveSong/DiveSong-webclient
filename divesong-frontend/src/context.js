@@ -31,7 +31,7 @@ export class Provider extends Component {
           'https://t2.genius.com/unsafe/220x220/https%3A%2F%2Fimages.genius.com%2F2ffbcb4f4921cb2dad89925466513a98.1000x1000x1.jpg',
         like: false,
         unlike: false,
-        request: true
+        request: false
       },
       {
         id: 2,
@@ -41,7 +41,7 @@ export class Provider extends Component {
           'https://c-sf.smule.com/sf/s77/sing/performance/cover/12/7e/ece6ca8c-07e1-4642-a3fa-27dffa135fc5_1024.jpg',
         like: false,
         unlike: false,
-        request: true
+        request: false
       },
       {
         id: 3,
@@ -51,7 +51,7 @@ export class Provider extends Component {
           'https://static.stereogum.com/uploads/2018/11/thank-u-next-1541300369-640x640.jpg',
         like: false,
         unlike: false,
-        request: true
+        request: false
       },
       {
         id: 4,
@@ -61,7 +61,70 @@ export class Provider extends Component {
           'https://upload.wikimedia.org/wikipedia/en/8/8f/Zara_Larsson_-_Lush_Life.png',
         like: false,
         unlike: false,
-        request: true
+        request: false
+      },
+      {
+        id: 5,
+        name: 'Ray Lee',
+        artist: 'Ray Lee',
+        img:
+          'https://upload.wikimedia.org/wikipedia/en/e/e0/GuyILikeSingle.jpg',
+        like: false,
+        unlike: false,
+        request: false
+      },
+      {
+        id: 6,
+        name: 'I LIke It',
+        artist: 'I LIke It',
+        img:
+          'https://upload.wikimedia.org/wikipedia/en/e/e0/GuyILikeSingle.jpg',
+        like: false,
+        unlike: false,
+        request: false
+      },
+
+      {
+        id: 7,
+        name: 'Ray Lee',
+        artist: 'Ray Lee',
+        img:
+          'https://upload.wikimedia.org/wikipedia/en/e/e0/GuyILikeSingle.jpg',
+        like: false,
+        unlike: false,
+        request: false
+      },
+
+      {
+        id: 8,
+        name: 'Ray Lee',
+        artist: 'Ray Lee',
+        img:
+          'https://upload.wikimedia.org/wikipedia/en/e/e0/GuyILikeSingle.jpg',
+        like: false,
+        unlike: false,
+        request: false
+      },
+      {
+        id: 9,
+        name: 'Ray Lee',
+        artist: 'Ray Lee',
+        img:
+          'https://upload.wikimedia.org/wikipedia/en/e/e0/GuyILikeSingle.jpg',
+        like: false,
+        unlike: false,
+        request: false
+      },
+
+      {
+        id: 10,
+        name: 'Ray Lee',
+        artist: 'Ray Lee',
+        img:
+          'https://upload.wikimedia.org/wikipedia/en/e/e0/GuyILikeSingle.jpg',
+        like: false,
+        unlike: false,
+        request: false
       }
     ],
 
