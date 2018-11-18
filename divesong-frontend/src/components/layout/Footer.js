@@ -4,8 +4,8 @@ class Footer extends Component {
   render() {
     // const { branding } = this.props;
     return (
-      <footer className="footer bg-dark">
-        <div className="container">Place audio player Here</div>
+      <footer className="footer veryblack">
+        <div className="container">Audio Player</div>
       </footer>
     );
   }

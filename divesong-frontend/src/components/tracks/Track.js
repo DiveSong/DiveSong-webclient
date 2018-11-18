@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Consumer } from '../context';
+import { Consumer } from '../../context';
 
 class Track extends Component {
   state = {
@@ -8,7 +8,7 @@ class Track extends Component {
   };
 
   render() {
-    const { id, name, artist, img } = this.props.track; // Destructuring.
+    const { id, name, artist, img } = this.props.track;
     // const { showTrackInfo } = this.state;
 
     return (
