@@ -13,7 +13,8 @@ class Tracks1 extends Component {
           return (
             <React.Fragment>
               {users.map(x =>
-                x.email === user.email && x.password === user.password
+                // // /*x.email === user.email && x.password === user.password*/
+                true
                   ? ((user.name = x.name),
                     console.log(user.name),
                     (

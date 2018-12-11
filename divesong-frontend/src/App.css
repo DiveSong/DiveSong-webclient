@@ -153,8 +153,18 @@
 }
 
 .background {
-  background-image: url('./assets/background.jpg');
+  background-image: radial-gradient(#0b8e0d 3%, #212529 60%);
+
   background-color: #212529;
+  
+  padding: 0;
+  margin: 0;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
 }
 
 .veryblack {

@@ -34,7 +34,7 @@ class Header extends Component {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link to="/" className="nav-link">
+                      <Link to="/profile" className="nav-link">
                         {user.name}
                       </Link>
                     </li>

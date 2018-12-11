@@ -10,15 +10,23 @@ class Tracks extends Component {
           const { tracks, users, user } = value;
 
           return (
-            <div className="album py-5">
+            <React.Fragment>
               <div className="container">
-                <div className="row">
-                  {tracks.map(track => (
-                    <Track key={track.id} track={track} />
-                  ))}
+                <h1 className="display-4 mb-2">
+                  <span className="text-success">Play</span>{' '}
+                  <span className="text-light">Music</span>
+                </h1>
+                <div className="album py-5">
+                  <div className="container">
+                    <div className="row">
+                      {tracks.map(track => (
+                        <Track key={track.id} track={track} />
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </React.Fragment>
           );
         }}
       </Consumer>

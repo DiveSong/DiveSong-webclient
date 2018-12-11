@@ -15,6 +15,47 @@ const reducer = (state, action) => {
         ...state,
         user: action.payload
       };
+
+    case 'LIKE_SONG':
+      return {
+        ...state,
+        tracks: state.tracks.map(
+          track => (
+            track.id == action.payload
+              ? ((track.like = !track.like),
+                track.unlike == true ? (track.unlike = false) : {})
+              : { track },
+            track
+          )
+        )
+      };
+
+    case 'UNLIKE_SONG':
+      return {
+        ...state,
+        tracks: state.tracks.map(
+          track => (
+            track.id == action.payload
+              ? ((track.unlike = !track.unlike),
+                track.like == true ? (track.like = false) : {})
+              : { track },
+            track
+          )
+        )
+      };
+
+    case 'REQUEST_SONG':
+      return {
+        ...state,
+        tracks: state.tracks.map(
+          track => (
+            track.id == action.payload
+              ? (track.request = !track.request)
+              : { track },
+            track
+          )
+        )
+      };
     default:
       return state;
   }
@@ -39,7 +80,7 @@ export class Provider extends Component {
         artist: 'Karen Williams',
         img:
           'https://c-sf.smule.com/sf/s77/sing/performance/cover/12/7e/ece6ca8c-07e1-4642-a3fa-27dffa135fc5_1024.jpg',
-        like: false,
+        like: true,
         unlike: false,
         request: false
       },
@@ -61,7 +102,7 @@ export class Provider extends Component {
           'https://upload.wikimedia.org/wikipedia/en/8/8f/Zara_Larsson_-_Lush_Life.png',
         like: false,
         unlike: false,
-        request: false
+        request: true
       },
       {
         id: 5,

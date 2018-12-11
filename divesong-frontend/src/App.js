@@ -19,6 +19,7 @@ import Tracks1 from './components/tracks/Tracks1';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from './context';
+import User_Tracks from './components/tracks/User_Tracks';
 
 class App extends Component {
   render() {
@@ -30,6 +31,7 @@ class App extends Component {
               <Route exact path="/" component={SignUpForm} />
               <Route exact path="/sign-in" component={SignInForm} />
               <Route exact path="/homepage" component={Tracks1} />
+              <Route exact path="/profile" component={User_Tracks} />
             </Switch>
           </div>
         </Router>

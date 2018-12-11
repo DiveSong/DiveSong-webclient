@@ -4,45 +4,34 @@ import { Consumer } from '../../context';
 import classnames from 'classnames';
 
 class Track extends Component {
-  state = {
-    like: false,
-    unlike: false,
-    request: false
-  };
-
-  onLikeCLick = () => {
-    const { like, unlike, request } = this.state;
-
-    if (unlike === true) {
-      this.setState({
-        unlike: false
-      });
-    }
-    this.setState({
-      like: true
+  onLikeCLick = (id, dispatch) => {
+    dispatch({
+      type: 'LIKE_SONG',
+      payload: id
     });
   };
 
-  onUnlikeCLick = () => {
-    const { like, unlike, request } = this.state;
+  onUnlikeCLick = (id, dispatch) => {
+    dispatch({
+      type: 'UNLIKE_SONG',
+      payload: id
+    });
+  };
 
-    if (like === true) {
-      this.setState({
-        like: false
-      });
-    }
-    this.setState({
-      unlike: true
+  onRequestClick = (id, dispatch) => {
+    dispatch({
+      type: 'REQUEST_SONG',
+      payload: id
     });
   };
 
   render() {
-    const { id, name, artist, img } = this.props.track;
-    const { like, unlike, request } = this.state;
+    const { id, name, artist, img, like, unlike, request } = this.props.track;
 
     return (
       <Consumer>
         {value => {
+          const { dispatch } = value;
           return (
             <div className="col-md-4">
               <div
@@ -75,7 +64,7 @@ class Track extends Component {
                             'col btn btn-sm btn-outline-success',
                             { 'bg-success': like }
                           )}
-                          onClick={this.onLikeCLick}
+                          onClick={this.onLikeCLick.bind(this, id, dispatch)}
                         >
                           <i
                             className="fas fa-thumbs-up"
@@ -88,7 +77,7 @@ class Track extends Component {
                             'col btn btn-sm btn-outline-success',
                             { 'bg-success': unlike }
                           )}
-                          onClick={this.onUnlikeCLick}
+                          onClick={this.onUnlikeCLick.bind(this, id, dispatch)}
                         >
                           <i
                             className="fas fa-thumbs-down"
@@ -103,11 +92,7 @@ class Track extends Component {
                           'col btn btn-sm btn-outline-success',
                           { 'btn-outline-dark bg-success': request }
                         )}
-                        onClick={() =>
-                          this.setState({
-                            request: !this.state.request
-                          })
-                        }
+                        onClick={this.onRequestClick.bind(this, id, dispatch)}
                       >
                         Request
                       </div>
