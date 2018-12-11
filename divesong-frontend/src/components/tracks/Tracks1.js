@@ -12,28 +12,28 @@ class Tracks1 extends Component {
           const { tracks, users, user } = value;
           return (
             <React.Fragment>
-              {users.map(x =>
-                // // /*x.email === user.email && x.password === user.password*/
-                true
-                  ? ((user.name = x.name),
-                    console.log(user.name),
-                    (
-                      <div className="background">
-                        <Header branding="DiveSong" />
+              {/* {users.map(x => */}
+              {/* /*x.email === user.email && x.password === user.password*/}
+              {/* true */}
+              {/* ? ((user.name = x.name), */}
+              {/* console.log(user.name), */}
+              {/* ( */}
+              <div className="background">
+                <Header branding="DiveSong" />
 
-                        <Tracks />
+                <Tracks />
 
-                        <Footer />
-                      </div>
-                    ))
-                  : (console.log('unverified'),
-                    (
+                <Footer />
+              </div>
+              {/* )) */}
+              {/* : (console.log('unverified'), */}
+              {/* (
                       <h3 style={{ backgroundColor: 'white' }}>
                         {' '}
                         Incorrect EMail or Password
                       </h3>
                     ))
-              )}
+              )} */}
             </React.Fragment>
           );
         }}

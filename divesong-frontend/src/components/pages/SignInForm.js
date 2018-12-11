@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Consumer } from '../../context';
 import uuid from 'uuid';
+import { config } from '../../config';
 
 class SignInForm extends Component {
   constructor() {
@@ -35,16 +36,79 @@ class SignInForm extends Component {
     console.log(this.state);
 
     const newUser = {
-      id: uuid(),
-      email,
-      password,
-      name: ''
+      uid: '',
+      email: '',
+      fname: '',
+      lname: '',
+      uname: '',
+      auth_token: ''
     };
 
-    dispatch({
-      type: 'TEMP_USER',
-      payload: newUser
-    });
+    // dispatch({
+    //   type: 'TEMP_USER',
+    //   payload: newUser
+    // });
+
+    let serialize = function(obj, prefix) {
+      var str = [],
+        p;
+      for (p in obj) {
+        if (obj.hasOwnProperty(p)) {
+          var k = prefix ? prefix + '[' + p + ']' : p,
+            v = obj[p];
+          str.push(
+            v !== null && typeof v === 'object'
+              ? serialize(v, k)
+              : encodeURIComponent(k) + '=' + encodeURIComponent(v)
+          );
+        }
+      }
+      return str.join('&');
+    };
+    const query = {
+      uname: email,
+      password,
+      'user-agent':
+        'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0',
+      secret: 'abcdef'
+    };
+    fetch(
+      `http://${config.server.hostname}:${config.server.port}/login?` +
+        serialize(query),
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then(response => (console.log(response.status), response.json()))
+      .then(
+        json => (
+          // dispatch({
+          //   type: 'TEMP_USER'
+          //   // payload: newUser
+          // }),
+          console.log(json.auth_token),
+          (newUser.uid = json.uid),
+          (newUser.email = json.email),
+          (newUser.fname = json.fname),
+          (newUser.auth_token = json.auth_token),
+          (newUser.uname = json.uname),
+          (newUser.lname = json.lname),
+          //   id: json.uid,
+          //   email,
+          //   password,
+          //   name: ''
+          // };
+
+          dispatch({
+            type: 'TEMP_USER',
+            payload: newUser
+          })
+        )
+      );
 
     this.props.history.push('/homepage');
   }
@@ -99,13 +163,13 @@ class SignInForm extends Component {
                 >
                   <div className="FormField">
                     <label className="FormField__Label" htmlFor="email">
-                      E-Mail Address
+                      E-Mail/UserName
                     </label>
                     <input
-                      type="email"
+                      type="text"
                       id="email"
                       className="FormField__Input text-dark"
-                      placeholder="Enter your email"
+                      placeholder="Enter your email/user-name"
                       name="email"
                       value={this.state.email}
                       onChange={this.handleChange}

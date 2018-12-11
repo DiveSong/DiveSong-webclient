@@ -17,7 +17,7 @@ class User_Tracks extends Component {
 
               <div className="container">
                 <h1 className="display-4 mb-2">
-                  <span className="text-success">Liked</span>{' '}
+                  <span className="text-success">Favourite</span>{' '}
                   <span className="text-light">Songs</span>
                 </h1>
                 <div className="album py-5">
@@ -34,14 +34,14 @@ class User_Tracks extends Component {
               </div>
               <div className="container">
                 <h1 className="display-4 mb-2">
-                  <span className="text-success">Requested</span>{' '}
+                  <span className="text-success">Unliked</span>{' '}
                   <span className="text-light">Songs</span>
                 </h1>
                 <div className="album py-5">
                   <div className="container">
                     <div className="row">
                       {tracks.map(track =>
-                        track.request ? (
+                        track.like === -1 ? (
                           <Track key={track.id} track={track} />
                         ) : null
                       )}

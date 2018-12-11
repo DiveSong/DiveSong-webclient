@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { config } from './config';
+import axios from 'axios';
 
 const Context = React.createContext();
 
@@ -21,9 +23,10 @@ const reducer = (state, action) => {
         ...state,
         tracks: state.tracks.map(
           track => (
-            track.id == action.payload
-              ? ((track.like = !track.like),
-                track.unlike == true ? (track.unlike = false) : {})
+            track.id === action.payload
+              ? track.like === 1
+                ? (track.like = 0)
+                : (track.like = 1)
               : { track },
             track
           )
@@ -35,27 +38,16 @@ const reducer = (state, action) => {
         ...state,
         tracks: state.tracks.map(
           track => (
-            track.id == action.payload
-              ? ((track.unlike = !track.unlike),
-                track.like == true ? (track.like = false) : {})
+            track.id === action.payload
+              ? track.like === -1
+                ? (track.like = 0)
+                : (track.like = -1)
               : { track },
             track
           )
         )
       };
 
-    case 'REQUEST_SONG':
-      return {
-        ...state,
-        tracks: state.tracks.map(
-          track => (
-            track.id == action.payload
-              ? (track.request = !track.request)
-              : { track },
-            track
-          )
-        )
-      };
     default:
       return state;
   }
@@ -63,124 +55,29 @@ const reducer = (state, action) => {
 
 export class Provider extends Component {
   state = {
-    tracks: [
-      {
-        id: 1,
-        name: 'John Doe',
-        artist: 'John Doe',
-        img:
-          'https://t2.genius.com/unsafe/220x220/https%3A%2F%2Fimages.genius.com%2F2ffbcb4f4921cb2dad89925466513a98.1000x1000x1.jpg',
-        like: false,
-        unlike: false,
-        request: false
-      },
-      {
-        id: 2,
-        name: 'Karen Williams',
-        artist: 'Karen Williams',
-        img:
-          'https://c-sf.smule.com/sf/s77/sing/performance/cover/12/7e/ece6ca8c-07e1-4642-a3fa-27dffa135fc5_1024.jpg',
-        like: true,
-        unlike: false,
-        request: false
-      },
-      {
-        id: 3,
-        name: 'Henry Johnson',
-        artist: 'Henry Johnson',
-        img:
-          'https://static.stereogum.com/uploads/2018/11/thank-u-next-1541300369-640x640.jpg',
-        like: false,
-        unlike: false,
-        request: false
-      },
-      {
-        id: 4,
-        name: 'Scarlett Ray',
-        artist: 'Scarlett Ray',
-        img:
-          'https://upload.wikimedia.org/wikipedia/en/8/8f/Zara_Larsson_-_Lush_Life.png',
-        like: false,
-        unlike: false,
-        request: true
-      },
-      {
-        id: 5,
-        name: 'Ray Lee',
-        artist: 'Ray Lee',
-        img:
-          'https://upload.wikimedia.org/wikipedia/en/e/e0/GuyILikeSingle.jpg',
-        like: false,
-        unlike: false,
-        request: false
-      },
-      {
-        id: 6,
-        name: 'I LIke It',
-        artist: 'I LIke It',
-        img:
-          'https://upload.wikimedia.org/wikipedia/en/e/e0/GuyILikeSingle.jpg',
-        like: false,
-        unlike: false,
-        request: false
-      },
+    tracks: [],
 
-      {
-        id: 7,
-        name: 'Ray Lee',
-        artist: 'Ray Lee',
-        img:
-          'https://upload.wikimedia.org/wikipedia/en/e/e0/GuyILikeSingle.jpg',
-        like: false,
-        unlike: false,
-        request: false
-      },
-
-      {
-        id: 8,
-        name: 'Ray Lee',
-        artist: 'Ray Lee',
-        img:
-          'https://upload.wikimedia.org/wikipedia/en/e/e0/GuyILikeSingle.jpg',
-        like: false,
-        unlike: false,
-        request: false
-      },
-      {
-        id: 9,
-        name: 'Ray Lee',
-        artist: 'Ray Lee',
-        img:
-          'https://upload.wikimedia.org/wikipedia/en/e/e0/GuyILikeSingle.jpg',
-        like: false,
-        unlike: false,
-        request: false
-      },
-
-      {
-        id: 10,
-        name: 'Ray Lee',
-        artist: 'Ray Lee',
-        img:
-          'https://upload.wikimedia.org/wikipedia/en/e/e0/GuyILikeSingle.jpg',
-        like: false,
-        unlike: false,
-        request: false
-      }
-    ],
-
-    users: [
-      {
-        id: 1,
-        name: 'Moosa',
-        email: 'moosa@gmail.com',
-        password: '1234'
-      }
-    ],
-    user: {},
+    user: {
+      id: 1,
+      name: 'Moosa',
+      email: 'moosa@gmail.com',
+      password: '1234'
+    },
 
     dispatch: action => this.setState(state => reducer(state, action))
   };
+
+  async componentDidMount() {
+    const res = await axios.get(
+      `http://${config.server.hostname}:${config.server.port}/songlist?${
+        this.state.user.id
+      }`
+    ); // Dont forget the await!!
+
+    this.setState({
+      tracks: res.data
+    });
+  }
 
   render() {
     return (

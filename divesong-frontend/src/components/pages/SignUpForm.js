@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Consumer } from '../../context';
 import { Link, NavLink } from 'react-router-dom';
 import uuid from 'uuid';
+import { config } from '../../config';
 
 class SignUpForm extends Component {
   constructor() {
@@ -10,7 +11,9 @@ class SignUpForm extends Component {
     this.state = {
       email: '',
       password: '',
-      name: '',
+      fname: '',
+      lname: '',
+      uname: '',
       hasAgreed: false
     };
 
@@ -30,22 +33,57 @@ class SignUpForm extends Component {
   handleSubmit = (dispatch, e) => {
     e.preventDefault();
 
-    const { name, email, password } = this.state;
+    const { uname, fname, lname, email, password } = this.state;
 
     console.log('The form was submitted with the following data:');
     console.log(this.state);
 
-    const newUser = {
-      id: uuid(),
-      name,
-      email,
-      password
-    };
+    // const newUser = {
+    //   id: uuid(),
+    //   name,
+    //   email,
+    //   password
+    // };
 
-    dispatch({
-      type: 'ADD_USER',
-      payload: newUser
-    });
+    let serialize = function(obj, prefix) {
+      var str = [],
+        p;
+      for (p in obj) {
+        if (obj.hasOwnProperty(p)) {
+          var k = prefix ? prefix + '[' + p + ']' : p,
+            v = obj[p];
+          str.push(
+            v !== null && typeof v === 'object'
+              ? serialize(v, k)
+              : encodeURIComponent(k) + '=' + encodeURIComponent(v)
+          );
+        }
+      }
+      return str.join('&');
+    };
+    const query = {
+      fname,
+      lname,
+      password,
+      email,
+      uname
+    };
+    fetch(
+      `http://${config.server.hostname}:${config.server.port}/addUser?` +
+        serialize(query),
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    ).then(res =>
+      dispatch({
+        type: 'ADD_USER'
+        // payload: newUser
+      })
+    );
 
     this.props.history.push('/sign-in');
   };
@@ -100,15 +138,43 @@ class SignUpForm extends Component {
                 >
                   <div className="FormField">
                     <label className="FormField__Label" htmlFor="name">
-                      Full Name
+                      User Name
                     </label>
                     <input
                       type="text"
                       id="name"
                       className="FormField__Input text-dark"
-                      placeholder="Enter your full name"
-                      name="name"
-                      value={this.state.name}
+                      placeholder="Enter your first name"
+                      name="uname"
+                      value={this.state.uname}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="FormField">
+                    <label className="FormField__Label" htmlFor="name">
+                      First Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      className="FormField__Input text-dark"
+                      placeholder="Enter your first name"
+                      name="fname"
+                      value={this.state.fname}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="FormField">
+                    <label className="FormField__Label" htmlFor="name">
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      className="FormField__Input text-dark"
+                      placeholder="Enter your last name"
+                      name="lname"
+                      value={this.state.lname}
                       onChange={this.handleChange}
                     />
                   </div>
