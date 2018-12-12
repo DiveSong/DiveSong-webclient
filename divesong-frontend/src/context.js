@@ -57,6 +57,14 @@ const reducer = (state, action) => {
         tracks: action.payload
       };
 
+    case 'SEARCH_SONG': {
+      let ret = {
+        ...state
+      };
+      ret.user.search = action.payload;
+      return ret;
+    }
+
     default:
       return state;
   }
@@ -75,7 +83,8 @@ export class Provider extends Component {
     },
     dispatch: action => (
       this.setState(state => reducer(state, action)),
-      action.type === 'TEMP_USER' ? this.getSongs() : {}
+      action.type === 'TEMP_USER' ? this.getSongs() : {},
+      action.type === 'SEARCH_SONG' ? this.getSongs() : {}
     )
   };
   // {cookies.set("uid",this.state.user["uid"]),
@@ -88,10 +97,14 @@ export class Provider extends Component {
   // console.log(this.state.user)}
 
   getSongs = async () => {
+    // const res = await axios.get(
+    //   `http://${config.server.hostname}:${config.server.port}/songlist?uid=${
+    //     this.state.user.uid
+    //   }`
     const res = await axios.get(
-      `http://${config.server.hostname}:${config.server.port}/songlist?uid=${
+      `http://${config.server.hostname}:${config.server.port}/search?uid=${
         this.state.user.uid
-      }`
+      }&search=${this.state.user.search}`
     ); // Dont forget the await!!
 
     this.setState({

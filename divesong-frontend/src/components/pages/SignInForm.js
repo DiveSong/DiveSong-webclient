@@ -99,6 +99,7 @@ class SignInForm extends Component {
           (newUser.uname = json.uname),
           (newUser.lname = json.lname),
           (newUser.session = true),
+          (newUser.search = ''),
           //   id: json.uid,
           //   email,
           //   password,
