@@ -81,18 +81,10 @@ class SignUpForm extends Component {
       }
     )
       .then(response => response.json())
+      .then(json => this.props.history.push('/sign-in'))
       .catch(error => {
         this.props.history.push('/login-fail');
       });
-
-    // this.state.status === '200' ? this.props.history.push('/sign-in') : {};
-    // if (this.state.status === '200') {
-    //   this.props.history.push('/sign-in');
-
-    //   return;
-    // }
-
-    // status ===  ? this.props.history.push('/sign-in') : {};
   };
 
   render() {
