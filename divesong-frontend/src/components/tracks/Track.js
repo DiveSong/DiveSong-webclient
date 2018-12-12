@@ -7,22 +7,61 @@ import axios from 'axios';
 // import serialize from '../../serialize';
 
 class Track extends Component {
-  onLikeCLick = (id, uid, dispatch) => {
-    dispatch({
-      type: 'LIKE_SONG',
-      payload: id
-    });
-  };
-
-  onUnlikeCLick = async (id, uid, dispatch) => {
-    const oper = {
-      auth_token:
-        'ec57c339c48b3a9e6ef60a8dbd8111e5d21518c5adc23a596ec3ecd9134349c804ef5f09952470abc6edd859c61eb0e03b64afc9c76e7cc5243590d68b596c040dfbe14f74d35bbecf18736d5a7db41961dd19cefeae0087fce6e7247ceb29c0d3c91d942b4f969df703b171b6e0b385e9ec8f46c3fc2e86f0c64ad0f6ba85c0',
+  onLikeCLick = (id, uid, auth_token, dispatch) => {
+    let serialize = function(obj, prefix) {
+      var str = [],
+        p;
+      for (p in obj) {
+        if (obj.hasOwnProperty(p)) {
+          var k = prefix ? prefix + '[' + p + ']' : p,
+            v = obj[p];
+          str.push(
+            v !== null && typeof v === 'object'
+              ? serialize(v, k)
+              : encodeURIComponent(k) + '=' + encodeURIComponent(v)
+          );
+        }
+      }
+      return str.join('&');
+    };
+    const query = {
+      auth_token: auth_token,
       'user-agent':
         'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0',
-      tid: 1,
+      tid: id,
       operation: 'like',
-      uid: 2
+      uid: uid
+    };
+    fetch(
+      `http://${config.server.hostname}:${config.server.port}/like?` +
+        serialize(query),
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    ).then(res =>
+      dispatch({
+        type: 'LIKE_SONG',
+        payload: id
+      })
+    );
+    // dispatch({
+    //   type: 'LIKE_SONG',
+    //   payload: id
+    // });
+  };
+
+  onUnlikeCLick = async (id, uid, auth_token, dispatch) => {
+    const oper = {
+      auth_token: auth_token,
+      'user-agent':
+        'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0',
+      tid: id,
+      operation: 'dislike',
+      uid: uid
     };
     // await axios
     //   .post(`http://${config.server.hostname}:${config.server.port}/like`, oper)
@@ -49,13 +88,12 @@ class Track extends Component {
       return str.join('&');
     };
     const query = {
-      auth_token:
-        'ec57c339c48b3a9e6ef60a8dbd8111e5d21518c5adc23a596ec3ecd9134349c804ef5f09952470abc6edd859c61eb0e03b64afc9c76e7cc5243590d68b596c040dfbe14f74d35bbecf18736d5a7db41961dd19cefeae0087fce6e7247ceb29c0d3c91d942b4f969df703b171b6e0b385e9ec8f46c3fc2e86f0c64ad0f6ba85c0',
+      auth_token: auth_token,
       'user-agent':
         'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0',
       tid: id,
-      operation: 'like',
-      uid: 2
+      operation: 'dislike',
+      uid: uid
     };
     fetch(
       `http://${config.server.hostname}:${config.server.port}/like?` +
@@ -75,11 +113,52 @@ class Track extends Component {
     );
   };
 
-  onRequestClick = (id, uid, dispatch) => {
-    dispatch({
-      type: 'REQUEST_SONG',
-      payload: id
-    });
+  onRequestClick = (id, uid, auth_token, dispatch) => {
+    let serialize = function(obj, prefix) {
+      var str = [],
+        p;
+      for (p in obj) {
+        if (obj.hasOwnProperty(p)) {
+          var k = prefix ? prefix + '[' + p + ']' : p,
+            v = obj[p];
+          str.push(
+            v !== null && typeof v === 'object'
+              ? serialize(v, k)
+              : encodeURIComponent(k) + '=' + encodeURIComponent(v)
+          );
+        }
+      }
+      return str.join('&');
+    };
+    const query = {
+      auth_token: auth_token,
+      'user-agent':
+        'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0',
+      tid: id,
+
+      uid: uid
+    };
+    fetch(
+      `http://${config.server.hostname}:${config.server.port}/request?` +
+        serialize(query),
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    ).then(res =>
+      dispatch({
+        type: 'REQUEST_SONG',
+        payload: id
+      })
+    );
+
+    // dispatch({
+    //   type: 'REQUEST_SONG',
+    //   payload: id
+    // });
   };
 
   render() {
@@ -103,7 +182,8 @@ class Track extends Component {
               >
                 <img
                   className="card img-top border-0"
-                  src={img}
+                  // src={img}
+                  src="https://t2.genius.com/unsafe/220x220/https%3A%2F%2Fimages.genius.com%2F2ffbcb4f4921cb2dad89925466513a98.1000x1000x1.jpg"
                   alt={name}
                   height="225px"
                   width="100%"
@@ -125,7 +205,8 @@ class Track extends Component {
                           onClick={this.onLikeCLick.bind(
                             this,
                             id,
-                            user.id,
+                            user.uid,
+                            user.auth_token,
                             dispatch
                           )}
                         >
@@ -143,7 +224,8 @@ class Track extends Component {
                           onClick={this.onUnlikeCLick.bind(
                             this,
                             id,
-                            user.id,
+                            user.uid,
+                            user.auth_token,
                             dispatch
                           )}
                         >
@@ -163,7 +245,8 @@ class Track extends Component {
                         onClick={this.onRequestClick.bind(
                           this,
                           id,
-                          user.id,
+                          user.uid,
+                          user.auth_token,
                           dispatch
                         )}
                       >

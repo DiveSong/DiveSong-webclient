@@ -78,12 +78,7 @@ class SignUpForm extends Component {
           'Content-Type': 'application/json'
         }
       }
-    ).then(res =>
-      dispatch({
-        type: 'ADD_USER'
-        // payload: newUser
-      })
-    );
+    ).then(response => console.log(response.status));
 
     this.props.history.push('/sign-in');
   };
@@ -142,7 +137,7 @@ class SignUpForm extends Component {
                     </label>
                     <input
                       type="text"
-                      id="name"
+                      id="uname"
                       className="FormField__Input text-dark"
                       placeholder="Enter your first name"
                       name="uname"
@@ -156,7 +151,7 @@ class SignUpForm extends Component {
                     </label>
                     <input
                       type="text"
-                      id="name"
+                      id="fname"
                       className="FormField__Input text-dark"
                       placeholder="Enter your first name"
                       name="fname"
@@ -170,7 +165,7 @@ class SignUpForm extends Component {
                     </label>
                     <input
                       type="text"
-                      id="name"
+                      id="lname"
                       className="FormField__Input text-dark"
                       placeholder="Enter your last name"
                       name="lname"

@@ -24,7 +24,7 @@ class User_Tracks extends Component {
                   <div className="container">
                     <div className="row">
                       {tracks.map(track =>
-                        track.like ? (
+                        track.like === 1 ? (
                           <Track key={track.id} track={track} />
                         ) : null
                       )}

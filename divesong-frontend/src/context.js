@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { config } from './config';
 import axios from 'axios';
 
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 const Context = React.createContext();
 
 const reducer = (state, action) => {
@@ -48,6 +51,12 @@ const reducer = (state, action) => {
         )
       };
 
+    case 'POPULATE_TRACKS':
+      return {
+        ...state,
+        tracks: action.payload
+      };
+
     default:
       return state;
   }
@@ -58,26 +67,37 @@ export class Provider extends Component {
     tracks: [],
 
     user: {
-      id: 1,
-      name: 'Moosa',
-      email: 'moosa@gmail.com',
-      password: '1234'
+      // id: 1,
+      // name: 'Moosa',
+      // email: 'moosa@gmail.com',
+      // password: '1234'
+      // random: 'random'
     },
-
-    dispatch: action => this.setState(state => reducer(state, action))
+    dispatch: action => (
+      this.setState(state => reducer(state, action)),
+      action.type === 'TEMP_USER' ? this.getSongs() : {}
+    )
   };
+  // {cookies.set("uid",this.state.user["uid"]),
+  // cookies.set("fname",this.state.user["fname"])
+  // cookies.set("lname",this.state.user["lname"])
+  // cookies.set("uname",this.state.user["uname"])
+  // cookies.set("email",this.state.user["email"])
+  // cookies.set("auth_token",this.state.user["auth_token"])
 
-  async componentDidMount() {
+  // console.log(this.state.user)}
+
+  getSongs = async () => {
     const res = await axios.get(
-      `http://${config.server.hostname}:${config.server.port}/songlist?${
-        this.state.user.id
+      `http://${config.server.hostname}:${config.server.port}/songlist?uid=${
+        this.state.user.uid
       }`
     ); // Dont forget the await!!
 
     this.setState({
       tracks: res.data
     });
-  }
+  };
 
   render() {
     return (

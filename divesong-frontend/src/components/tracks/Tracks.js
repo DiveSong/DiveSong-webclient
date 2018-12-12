@@ -19,9 +19,11 @@ class Tracks extends Component {
                 <div className="album py-5">
                   <div className="container">
                     <div className="row">
-                      {tracks.map(track => (
-                        <Track key={track.id} track={track} />
-                      ))}
+                      {tracks
+                        ? tracks.map(track => (
+                            <Track key={track.id} track={track} />
+                          ))
+                        : null}
                     </div>
                   </div>
                 </div>
