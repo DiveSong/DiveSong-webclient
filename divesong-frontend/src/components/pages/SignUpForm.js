@@ -14,7 +14,7 @@ class SignUpForm extends Component {
       fname: '',
       lname: '',
       uname: '',
-      hasAgreed: false
+      hasAgreed: true
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -212,7 +212,7 @@ class SignUpForm extends Component {
                     />
                   </div>
 
-                  <div className="FormField">
+                  {/* <div className="FormField">
                     <label className="FormField__CheckboxLabel">
                       <input
                         className="FormField__Checkbox"
@@ -226,7 +226,7 @@ class SignUpForm extends Component {
                         terms of service
                       </a>
                     </label>
-                  </div>
+                  </div> */}
 
                   <div className="FormField">
                     <button className="FormField__Button mr-20">Sign Up</button>{' '}
