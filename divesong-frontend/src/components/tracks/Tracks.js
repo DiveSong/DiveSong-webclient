@@ -24,10 +24,36 @@ class Tracks extends Component {
                             <Track key={track.id} track={track} />
                           ))
                         : null}
+
+                      {user.session ? null : (
+                        <div>
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <span className="text-light text-center">
+                            Sign Up to Request your favourite Songs
+                          </span>
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
-
                 <h1 className="display-4 mb-2">
                   <span className="text-success">Most</span>{' '}
                   <span className="text-light">Played</span>
