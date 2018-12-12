@@ -83,7 +83,7 @@ class SignUpForm extends Component {
       .then(response => response.json())
       .then(json => this.props.history.push('/sign-in'))
       .catch(error => {
-        this.props.history.push('/login-fail');
+        this.props.history.push('/signup-fail');
       });
   };
 

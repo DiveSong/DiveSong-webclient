@@ -21,6 +21,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from './context';
 import User_Tracks from './components/tracks/User_Tracks';
 import LoginFail from './components/pages/LoginFail';
+import SignUpFail from './components/pages/SignUpFail';
 
 class App extends Component {
   render() {
@@ -34,6 +35,7 @@ class App extends Component {
               <Route exact path="/homepage" component={Tracks1} />
               <Route exact path="/profile" component={User_Tracks} />
               <Route exact path="/login-fail" component={LoginFail} />
+              <Route exact path="/signup-fail" component={SignUpFail} />
             </Switch>
           </div>
         </Router>
