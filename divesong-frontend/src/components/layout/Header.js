@@ -29,9 +29,12 @@ class Header extends Component {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link to="/" className="nav-link">
+                      {/* <Link to="/" className="nav-link">
                         Log Out
-                      </Link>
+                      </Link> */}
+                      <a href="/sign-in" className="nav-link">
+                        Log Out
+                      </a>
                     </li>
                     <li className="nav-item">
                       <Link to="/profile" className="nav-link">

@@ -41,7 +41,8 @@ class SignInForm extends Component {
       fname: '',
       lname: '',
       uname: '',
-      auth_token: ''
+      auth_token: '',
+      session: false
     };
 
     // dispatch({
@@ -97,6 +98,7 @@ class SignInForm extends Component {
           (newUser.auth_token = json.auth_token),
           (newUser.uname = json.uname),
           (newUser.lname = json.lname),
+          (newUser.session = true),
           //   id: json.uid,
           //   email,
           //   password,
@@ -106,11 +108,13 @@ class SignInForm extends Component {
           dispatch({
             type: 'TEMP_USER',
             payload: newUser
-          })
+          }),
+          this.props.history.push('/homepage')
         )
-      );
-
-    this.props.history.push('/homepage');
+      )
+      .catch(error => {
+        this.props.history.push('/login-fail');
+      });
   }
 
   render() {
