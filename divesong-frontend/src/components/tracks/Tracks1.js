@@ -22,6 +22,11 @@ class Tracks1 extends Component {
                 <Header branding="DiveSong" />
 
                 <Tracks />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
 
                 <Footer />
               </div>

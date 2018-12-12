@@ -32,6 +32,15 @@ class User_Tracks extends Component {
                   </div>
                 </div>
               </div>
+
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+
               <div className="container">
                 <h1 className="display-4 mb-2">
                   <span className="text-success">Unliked</span>{' '}
@@ -49,6 +58,13 @@ class User_Tracks extends Component {
                   </div>
                 </div>
               </div>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+
               <Footer />
             </div>
           );

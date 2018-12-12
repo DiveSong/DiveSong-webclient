@@ -68,6 +68,7 @@ class SignUpForm extends Component {
       email,
       uname
     };
+
     fetch(
       `http://${config.server.hostname}:${config.server.port}/addUser?` +
         serialize(query),
@@ -78,12 +79,24 @@ class SignUpForm extends Component {
           'Content-Type': 'application/json'
         }
       }
-    ).then(response => console.log(response.status));
+    )
+      .then(response => response.json())
+      .catch(error => {
+        this.props.history.push('/login-fail');
+      });
 
-    this.props.history.push('/sign-in');
+    // this.state.status === '200' ? this.props.history.push('/sign-in') : {};
+    // if (this.state.status === '200') {
+    //   this.props.history.push('/sign-in');
+
+    //   return;
+    // }
+
+    // status ===  ? this.props.history.push('/sign-in') : {};
   };
 
   render() {
+    const { status } = this.state;
     return (
       <Consumer>
         {value => {
@@ -107,7 +120,12 @@ class SignUpForm extends Component {
                   Sign Up
                 </NavLink>
               </div>
-
+              {/* {status === 200 ? {} : <p className="text-danger">error</p>} */}
+              {/* {status !== '200' ? (
+                <p className="text-danger">error 409 </p>
+              ) : (
+                <div />
+              )} */}
               <div className="FormTitle">
                 <NavLink
                   to="/sign-in"

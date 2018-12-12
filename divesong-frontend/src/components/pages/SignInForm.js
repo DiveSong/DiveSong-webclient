@@ -42,7 +42,8 @@ class SignInForm extends Component {
       lname: '',
       uname: '',
       auth_token: '',
-      session: false
+      session: false,
+      search: ''
     };
 
     // dispatch({

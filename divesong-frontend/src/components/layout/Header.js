@@ -8,24 +8,24 @@ class Header extends Component {
   };
 
   handleChange = (dispatch, e) => {
-    this.setState({
-      [e.target.name]: e.target.value
+    // this.setState({
+    //   [e.target.name]: e.target.value
+    // });
+    // const { search } = this.state;
+    const x = e.target.value;
+    // console.log(x);
+    this.setState({ search: e.target.value }, () => {
+      console.log(this.state.search);
+      dispatch({
+        type: 'SEARCH_SONG',
+        payload: this.state.search
+      });
     });
-    const { search } = this.state;
-    console.log(search);
-    dispatch({
-      type: 'SEARCH_SONG',
-      payload: search
-    });
+    // dispatch({
+    //   type: 'SEARCH_SONG',
+    //   payload: x
+    // });
   };
-
-  handleSubmit(dispatch, e) {
-    e.preventDefault();
-    const { search } = this.state;
-    console.log(search);
-    const search_key = search;
-    dispatch({ type: 'SEARCH_SONG', payload: search_key });
-  }
 
   render() {
     const { branding } = this.props;
@@ -47,12 +47,12 @@ class Header extends Component {
                   name="search"
                   placeholder="Search"
                   aria-label="Search"
-                  value={this.state.search}
                   // onSubmit={
                   // console.log('submitted')
                   // this.handleSubmit.bind(this, dispatch)
                   // }
                   onChange={this.handleChange.bind(this, dispatch)}
+                  onKeyDown={this.handleChange.bind(this, dispatch)}
                 />
 
                 {/* </form> */}
