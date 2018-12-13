@@ -16,19 +16,35 @@ class Footer extends Component {
     this.setState({
       song: res.data
     });
-
-    // const s = document.createElement('script');
-    // s.type = 'text/javascript';
-    // s.async = true;
-    // s.innerHTML =
-    //   'var aud = document.getElementById("myAudio");aud.onended = function() {alert("The audio has ended");};';
-    // document.body.appendChild(s);
   }
+  handleOnEnded = () => {
+    axios.get(
+      `http://${config.server.hostname}:${config.server.port}/detailNextSong`
+    )
+      .then(res => this.setState({ song: res.data })) // Dont forget the await!!
+
+    // this.setState({
+    //   song: res.data
+    // });
+    document.getElementById('mySource').src = `{http://${config.server.hostname}:${config.server.port}/song?trackid=${this.state.song.id}`
+
+    document.getElementById('myAudio').load()
+
+
+  }
+
+  // const s = document.createElement('script');
+  // s.type = 'text/javascript';
+  // s.async = true;
+  // s.innerHTML =
+  //   'var aud = document.getElementById("myAudio");aud.onended = function() {alert("The audio has ended");};';
+  // document.body.appendChild(s);
   render() {
     // const { branding } = this.props;
 
-    const { name, artists, lplayed } = this.state.song;
+    const { id, name, artists, lplayed } = this.state.song;
     console.log(lplayed);
+    console.log(id)
 
     return (
       <React.Fragment>
@@ -68,13 +84,15 @@ class Footer extends Component {
                 id="myAudio"
                 controls
                 autoPlay
-              // onEnded={document.getElementById('myAudio').load()}
-              // onEnded={{
-              //   function() {
-              //     alert('Audio has ended');
-              //   }
-              // }}
+                // onEnded={document.getElementById('myAudio').load()}
+                // onEnded={{
+                //   function() {
+                //     alert('Audio has ended');
+                //   }
+                // }}
+                onEnded={this.handleOnEnded}
               >
+                {/* <source id="mySource" src={`http://${config.server.hostname}:${config.server.port}/song?trackid=${id}`} type="audio/mp3" /> */}
                 <source id="mySource" src={`http://${config.server.hostname}:${config.server.port}/getNextSong`} type="audio/mp3" />
               </audio>
             </div>
