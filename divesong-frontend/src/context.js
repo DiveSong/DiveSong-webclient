@@ -65,6 +65,20 @@ const reducer = (state, action) => {
       return ret;
     }
 
+    case 'REQUEST_SONG': {
+      return {
+        ...state,
+        tracks: state.tracks.map(
+          track => (
+            track.id === action.payload
+              ? (track.requested = !track.requested)
+              : { track },
+            track
+          )
+        )
+      };
+    }
+
     default:
       return state;
   }
