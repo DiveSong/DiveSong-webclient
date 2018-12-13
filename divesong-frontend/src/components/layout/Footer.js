@@ -63,27 +63,32 @@ class Footer extends Component {
             >
               {' '}
             </iframe> */}
-
-            <audio
-              id="myAudio"
-              controls
-              autoPlay
-            // onEnded={{
-            //   function() {
-            //     alert('Audio has ended');
-            //   }
-            // }}
-            >
-              <source id="mySource" src={`http://${config.server.hostname}:${config.server.port}/getNextSong`} type="audio/mp3" />
-            </audio>
+            <div id="myDiv">
+              <audio
+                id="myAudio"
+                controls
+                autoPlay
+              // onEnded={document.getElementById('myAudio').load()}
+              // onEnded={{
+              //   function() {
+              //     alert('Audio has ended');
+              //   }
+              // }}
+              >
+                <source id="mySource" src={`http://${config.server.hostname}:${config.server.port}/getNextSong`} type="audio/mp3" />
+              </audio>
+            </div>
           </div>
           {/* <script /> */}
         </footer>
 
         <Helmet>
           <script>
+            {/* {
+              `var aud = document.getElementById("myAudio"); aud.onended = function() {document.getElementById("myDiv").innerHTML="<audio id='myAudio' controls autoPlay <source id=\'mySource\' src={'http://'${config.server.hostname}:${config.server.port}/getNextSong'} type=\'audio/mp3\'/> </audio>"; console.log('Song Ended')};`
+            } */}
             {
-              `var aud = document.getElementById("myAudio"); aud.onended = function() {aud.innerHTML="<source id=\'mySource\'src={'http://'${config.server.hostname}:${config.server.port}/getNextSong'}type=\'audio/mp3\'/>"; console.log('Song Ended')};`
+              // `var aud = document.getElementById("myAudio"); aud.onended = function() {document.getElementById("mySource").src='http://${config.server.hostname}:${config.server.port}/getNextSong' ;aud.load(); console.log('Song Change ')}`
             }
           </script>
         </Helmet>
