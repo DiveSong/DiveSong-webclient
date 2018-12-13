@@ -135,7 +135,6 @@ class Track extends Component {
       'user-agent':
         'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0',
       tid: id,
-
       uid: uid
     };
     fetch(
@@ -162,7 +161,7 @@ class Track extends Component {
   };
 
   render() {
-    const { id, name, artist, img, like } = this.props.track;
+    const { id, name, artist, img, like, requested } = this.props.track;
 
     return (
       <Consumer>
@@ -243,7 +242,8 @@ class Track extends Component {
                       <div
                         className={classnames(
                           'col btn btn-sm btn-outline-success',
-                          { 'btn-outline-dark bg-success': false }
+                          // { 'bg-success': like === -1 }
+                          { 'btn-outline-dark bg-success': requested === 1 }
                         )}
                         onClick={this.onRequestClick.bind(
                           this,
