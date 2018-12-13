@@ -51,6 +51,11 @@ const reducer = (state, action) => {
         )
       };
 
+    case 'REQUEST_SONG':
+      return {
+        state
+      };
+
     case 'POPULATE_TRACKS':
       return {
         ...state,
@@ -63,20 +68,6 @@ const reducer = (state, action) => {
       };
       ret.user.search = action.payload;
       return ret;
-    }
-
-    case 'REQUEST_SONG': {
-      return {
-        ...state,
-        tracks: state.tracks.map(
-          track => (
-            track.id === action.payload
-              ? (track.requested = !track.requested)
-              : { track },
-            track
-          )
-        )
-      };
     }
 
     default:
@@ -98,7 +89,8 @@ export class Provider extends Component {
     dispatch: action => (
       this.setState(state => reducer(state, action)),
       action.type === 'TEMP_USER' ? this.getSongs() : {},
-      action.type === 'SEARCH_SONG' ? this.getSongs() : {}
+      action.type === 'SEARCH_SONG' ? this.getSongs() : {},
+      action.type === 'REQUEST_SONG' ? this.getSongs() : {}
     )
   };
   // {cookies.set("uid",this.state.user["uid"]),
