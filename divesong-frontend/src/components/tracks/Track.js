@@ -180,21 +180,17 @@ class Track extends Component {
                 //   })
                 // }
               >
-                <object
-                  data={`http://${
-                    config.server.hostname
-                  }/Data%20Transfer/Streamline-48-128.png`}
-                  type="image/png"
-                >
-                  <img
-                    className="card img-top border-0"
-                    src={img}
-                    // src="https://t2.genius.com/unsafe/220x220/https%3A%2F%2Fimages.genius.com%2F2ffbcb4f4921cb2dad89925466513a98.1000x1000x1.jpg"
-                    alt={name}
-                    height="225px"
-                    width="100%"
-                  />
-                </object>
+                <img
+                  className="card img-top border-0 bg-dark"
+                  src={`http://${config.server.hostname}:${
+                    config.server.port
+                  }/image?tid=${id}`}
+                  // src="https://t2.genius.com/unsafe/220x220/https%3A%2F%2Fimages.genius.com%2F2ffbcb4f4921cb2dad89925466513a98.1000x1000x1.jpg"
+                  alt={name}
+                  height="225px"
+                  width="100%"
+                />
+
                 <div className="card-body">
                   <h6 className="text-white-50 bg-dark text-truncate">
                     {name} - {artist}{' '}
